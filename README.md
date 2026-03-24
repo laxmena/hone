@@ -82,7 +82,7 @@ Iter | Status | Score  | Description
 20   | keep   | 0.0370 | Try re.findall() to process the entire file at once and avoid line iteration overhead...
 ```
 
-[View the full HTML report](https://github.com/laxmena/hone/tree/main/.hone)
+Run 1 report | [Run 2 report](https://htmlpreview.github.io/?https://github.com/laxmena/hone/blob/main/.hone/runs/2026-03-23_190242/report.html)
 
 ---
 
@@ -98,7 +98,7 @@ The AI learned that algorithm beats data structure. Grid resolution barely matte
 
 ![Distance calculation — two runs, 31x total speedup](https://raw.githubusercontent.com/laxmena/blog-assets/refs/heads/main/images/distance_calc_experiment.jpeg)
 
-[Run 1 report](https://github.com/laxmena/hone/tree/main/.hone) | [Run 2 report](https://github.com/laxmena/hone/tree/main/.hone)
+[Run 1 report](https://htmlpreview.github.io/?https://github.com/laxmena/hone/blob/main/.hone/runs/2026-03-23_193401/report.html) | [Run 2 report](https://htmlpreview.github.io/?https://github.com/laxmena/hone/blob/main/.hone/runs/2026-03-23_194137/report.html)
 
 ---
 
