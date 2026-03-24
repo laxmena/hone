@@ -4,6 +4,8 @@ Hone automates software optimization. You give it a benchmark command and a targ
 
 It operates entirely autonomously in your terminal. It writes code, runs your benchmark, evaluates the crash or score, and loops. It learns from its own tracebacks. It never stops until it hits your target or exhausts its budget. 
 
+This project is inspired by Karpathy's [autoresearch](https://github.com/karpathy/autoresearch) project.
+
 ## How it works
 
 Hone combines minimal orchestration with LLMs. Each experiment runs cleanly. 
