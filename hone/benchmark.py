@@ -23,6 +23,10 @@ class Benchmark:
         stdout = result.stdout
         stderr = result.stderr
 
+        if result.returncode != 0:
+            err_msg = stderr.strip() if stderr.strip() else stdout.strip()
+            raise HoneBenchmarkError(f"Benchmark script returned exit code {result.returncode}:\n{err_msg}")
+
         score = self._extract_score(stdout)
         violations = self._check_constraints(stdout)
 

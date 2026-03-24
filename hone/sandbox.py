@@ -27,7 +27,7 @@ def apply_unified_diff(path: Path, diff: str):
     
     try:
         # Rely on the system `patch` command (stdli-only as in no pip dependencies)
-        subprocess.run(["patch", "-u", str(path), "-i", patch_file], check=True, capture_output=True, text=True)
+        subprocess.run(["patch", "-u", "-f", str(path), "-i", patch_file], check=True, capture_output=True, text=True, stdin=subprocess.DEVNULL)
     except subprocess.CalledProcessError as e:
         raise HoneSandboxError(f"Failed to apply patch on {path}: {e.stderr}")
     finally:

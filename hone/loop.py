@@ -18,18 +18,25 @@ def print_budget_stop(cost: float, budget: float):
 
 def print_dry_run(ops: Operations):
     print("  iter  1  (planned)")
-    print(f"    reasoning: {ops.reasoning}")
+    if getattr(ops, 'feedback', ''):
+        print(f"    feedback:  {ops.feedback}")
+    print(f"    hypothesis: {ops.reasoning}")
     print("    operations:")
     for op in ops.operations:
         print(f"      {op.type}   {getattr(op, 'path', getattr(op, 'command', ''))}")
     print("\n  stopped — dry-run complete")
 
-def print_iteration(n: int, result: BenchmarkResult, accepted: bool, reasoning: str, state: LoopState):
+def print_iteration(n: int, result: BenchmarkResult, accepted: bool, ops: Operations, state: LoopState):
     arrow = "↑" if accepted else "↓"
     cost_str = f"${state.cost_usd:.2f}"
-    reasoning_short = reasoning.split('\n')[0][:50] + ("..." if len(reasoning.split('\n')[0]) > 50 else "")
+    reasoning_short = ops.reasoning.split('\n')[0][:50] + ("..." if len(ops.reasoning.split('\n')[0]) > 50 else "")
     score_str = f"{result.score:<5.2f}" if isinstance(result.score, float) else str(result.score)
     print(f"  iter {n:2d}  {arrow}  {score_str:<5}   {reasoning_short:<45} {cost_str}")
+    
+    if hasattr(ops, 'feedback') and ops.feedback:
+        feedback_short = ops.feedback.split('\n')[0][:77] + ("..." if len(ops.feedback.split('\n')[0]) > 77 else "")
+        from rich.console import Console
+        Console().print(f"           [dim yellow]↳ feedback: {feedback_short}[/dim yellow]")
     
     if result.score in (float('inf'), float('-inf')):
         err = result.stderr.strip() if result.stderr else (result.constraint_violations[0] if result.constraint_violations else "")
@@ -50,7 +57,7 @@ def print_summary(state: LoopState, log: Log):
     for it in log.data["iterations"]:
         score_val = it["score"]
         status = "keep" if it["accepted"] else ("crash" if score_val in (float('inf'), float('-inf')) else "discard")
-        desc = it["reasoning"].replace('\n', ' ')
+        desc = it.get("reasoning", "").replace('\n', ' ')
         if len(desc) > 60: desc = desc[:57] + "..."
         score_str = f"{score_val:.4f}" if isinstance(score_val, float) else str(score_val)
         print(f"  {it['n']:<4} | {status:<8} | {score_str:<8} | {desc}")
@@ -134,7 +141,7 @@ class Loop:
 
         # persist + print
         self.log.write_iteration(n, ops, result, accepted, self.state)
-        print_iteration(n, result, accepted, ops.reasoning, self.state)
+        print_iteration(n, result, accepted, ops, self.state)
 
         # continue conversation
         self.llm.report_back(result, accepted)
@@ -142,7 +149,7 @@ class Loop:
         target_reached = self._target_reached(result.score)
         if target_reached:
             print("  ✓ target reached")
-        elif not self.state.stopped:
+        elif self.state and not self.state.stopped:
             import time
             time.sleep(3.5)  # Pause to prevent API rate limiting on deep loops
             

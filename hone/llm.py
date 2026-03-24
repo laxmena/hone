@@ -10,7 +10,8 @@ You are an autonomous optimization agent. Your job is to improve software agains
 
 Respond ONLY with valid JSON:
 {
-  "reasoning": "one line — your brief hypothesis and what you will change",
+  "feedback": "brief analysis of the previous run's result",
+  "reasoning": "one line — your hypothesis for THIS iteration and what you will change",
   "operations": [
     {"type": "write",  "path": "relative/path", "content": "full file content"},
     {"type": "patch",  "path": "relative/path", "diff": "unified diff string"},

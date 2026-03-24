@@ -53,10 +53,11 @@ class RunOperation:
 class Operations:
     reasoning: str
     operations: List[Any]
+    feedback: str = ""
 
     @classmethod
     def from_dict(cls, data: dict):
-        ops = []
+        ops: List[Any] = []
         for op_data in data.get("operations", []):
             op_type = op_data.get("type")
             if op_type == "write":
@@ -67,7 +68,11 @@ class Operations:
                 ops.append(DeleteOperation(path=op_data["path"]))
             elif op_type == "run":
                 ops.append(RunOperation(command=op_data["command"]))
-        return cls(reasoning=data.get("reasoning", ""), operations=ops)
+        return cls(
+            reasoning=data.get("reasoning", ""), 
+            operations=ops,
+            feedback=data.get("feedback", "")
+        )
 
     def to_dict(self):
         out_ops = []
@@ -76,6 +81,7 @@ class Operations:
             d["type"] = op.type  # ensure type is included
             out_ops.append(d)
         return {
+            "feedback": self.feedback,
             "reasoning": self.reasoning,
             "operations": out_ops
         }
