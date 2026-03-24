@@ -73,7 +73,7 @@ The final result ran in **0.037 seconds**. Hone achieved a 41x speedup entirely 
   20   | keep     | 0.0370 | Excellent! 0.0473s with simpler regex. Try processing the entire file at once with re.findall() to avoid line iteration overhead...
 ```
 
-[View the full HTML generated report](.hone/runs/2026-03-23_190242/report.html)
+[View the full HTML generated report](https://htmlpreview.github.io/?https://github.com/laxmena/hone/blob/main/.hone/runs/2026-03-23_190242/report.html)
 
 ## The Distance Calculation Experiment
 
@@ -85,4 +85,4 @@ Run 2 achieved 0.069s by changing one thing: stop searching the moment you find 
 
 The AI learned that algorithm beats data structure. Grid resolution barely mattered. Early termination dominated.
 
-[Run 1 report](.hone/runs/2026-03-23_193401/report.html) | [Run 2 report](.hone/runs/2026-03-23_194137/report.html)
+[Run 1 report]([.hone/runs/2026-03-23_193401/report.html](https://htmlpreview.github.io/?https://github.com/laxmena/hone/blob/main/.hone/runs/2026-03-23_193401/report.html)) | [Run 2 report]([.hone/runs/2026-03-23_194137/report.html](https://htmlpreview.github.io/?https://github.com/laxmena/hone/blob/main/.hone/runs/2026-03-23_194137/report.html))
