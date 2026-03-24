@@ -1,5 +1,7 @@
 # Hone
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/laxmena/hone)
+
 Hone automates software optimization. Give it a goal and a benchmark. It rewrites your code until it wins.
 
 It runs entirely in your terminal. It writes code, runs your benchmark, reads the score, and loops. It learns from its own tracebacks. It stops when it hits your target or exhausts its budget.
