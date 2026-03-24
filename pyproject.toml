@@ -1,0 +1,20 @@
+[project]
+name = "hone"
+version = "1.1.0"
+description = "Hone - an optimization loop runner"
+requires-python = ">=3.9"
+dependencies = [
+    "click",
+    "anthropic",
+    "openai",
+    "ollama",
+    "rich",
+    "python-dotenv",
+]
+
+[project.scripts]
+hone = "hone.main:run"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
