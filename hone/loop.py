@@ -142,6 +142,10 @@ class Loop:
         target_reached = self._target_reached(result.score)
         if target_reached:
             print("  ✓ target reached")
+        elif not self.state.stopped:
+            import time
+            time.sleep(3.5)  # Pause to prevent API rate limiting on deep loops
+            
         return target_reached
 
     def _is_improvement(self, result: BenchmarkResult) -> bool:
