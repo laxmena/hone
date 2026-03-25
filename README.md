@@ -56,6 +56,19 @@ hone "Optimize process_logs.py to run under 0.02 seconds. Think creatively." \
      --budget 2.0
 ```
 
+For complex goals with detailed context, write them to a file and pass it with `--goal-file`:
+
+```bash
+hone --goal-file goal.md \
+     --bench "python bench_logs.py" \
+     --files "process_logs.py" \
+     --optimize lower \
+     --target 0.02 \
+     --budget 2.0
+```
+
+`--goal-file` accepts any plain text or markdown file. It is equivalent to passing the file's contents as the `GOAL` argument — existing usage is unaffected.
+
 Hone handles the rest.
 
 ---

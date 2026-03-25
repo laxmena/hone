@@ -15,7 +15,9 @@ def default_model() -> str:
     return "claude-haiku-4-5"
 
 @click.command()
-@click.argument("goal")
+@click.argument("goal", default="")
+@click.option("--goal-file",           type=click.Path(exists=True, dir_okay=False),
+              help="Path to a file containing the goal (alternative to the GOAL argument)")
 @click.option("--bench",               required=True)
 @click.option("--target",              type=float)
 @click.option("--constraint",          multiple=True)
@@ -32,8 +34,12 @@ def default_model() -> str:
               help="Hard stop at this USD cost (e.g. 1.00)")
 @click.option("--snapshot-strategy",   default="copy",
                                        type=click.Choice(["copy", "git"]))
-def run(goal, bench, target, constraint, files, optimize, max_iter,
+def run(goal, goal_file, bench, target, constraint, files, optimize, max_iter,
         model, score_pattern, timeout, dry_run, budget, snapshot_strategy):
+    if goal_file:
+        goal = Path(goal_file).read_text()
+    if not goal:
+        raise click.UsageError("Provide either the GOAL argument or --goal-file.")
     config = Config(
         goal=goal,
         bench_command=bench,
