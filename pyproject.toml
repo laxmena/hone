@@ -1,7 +1,11 @@
 [project]
-name = "hone"
+name = "hone-ai"
 version = "1.1.0"
-description = "Hone - an optimization loop runner"
+authors = [
+  { name="Lakshmanan Meiyappan", email="your-email@example.com" },
+]
+description = "A tool for autonomous code optimization and agentic loops"
+readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
     "click",
