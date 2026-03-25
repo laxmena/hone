@@ -26,6 +26,12 @@ Hone combines minimal orchestration with LLMs. Each experiment runs cleanly.
 ## Installation
 
 ```bash
+pip install hone-ai
+```
+
+Or from source:
+
+```bash
 git clone https://github.com/laxmena/hone.git
 cd hone
 python -m venv venv

@@ -2,7 +2,7 @@
 name = "hone-ai"
 version = "1.1.0"
 authors = [
-  { name="Lakshmanan Meiyappan", email="your-email@example.com" },
+  { name="Lakshmanan Meiyappan", email="lakshmanan.meiyappan@gmail.com" },
 ]
 description = "A tool for autonomous code optimization and agentic loops"
 readme = "README.md"
@@ -18,6 +18,9 @@ dependencies = [
 
 [project.scripts]
 hone = "hone.main:run"
+
+[tool.hatch.build.targets.wheel]
+packages = ["hone"]
 
 [build-system]
 requires = ["hatchling"]
